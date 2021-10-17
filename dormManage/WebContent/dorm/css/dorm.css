@@ -1,0 +1,193 @@
+.data_list {
+	border: 1px solid #E5E5E5;
+	padding: 10px;
+	background-color: #FDFDFD;
+	width: 96%;
+	margin-left:40px;
+}
+
+.data_list .data_list_title{
+	font-size: 15px;
+    font-weight: bold;
+    border-bottom: 1px solid #E5E5E5;
+    padding-bottom: 10px;
+    padding-top: 5px;
+}
+
+.data_list .data_list_title img{
+	vertical-align: top;
+}
+
+.data_list .form-search .btn{
+	display: inline-block;
+	padding: 4px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #cccccc;
+    cursor: pointer;
+    border-radius: 4px;
+	color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: #4dc47d;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.data_list .data_search select{
+	display: inline-block;
+	margin-bottom: 0;
+    vertical-align: middle;
+        background-color: #ffffff;
+    border: 1px solid #cccccc;
+}
+
+select, input[type="file"] {
+    height: 30px;
+    line-height: 30px;
+}
+
+imput{
+	outline: none; 
+outline: medium;
+}
+
+select,input{
+	    border-radius: 4px;
+}
+
+
+
+.data_list .diary_datas ul{
+	list-style-type: none;
+}
+
+.data_list .diary_datas ul li{
+	margin-top: 5px;
+}
+
+.data_list .datas{
+	padding: 5px;
+}
+
+.data_list .datas ul {
+	list-style-type: none;
+}
+
+.data_list .datas ul li {
+	margin-top: 5px;
+}
+
+.data_list .user_image{
+	text-align: center;
+}
+
+.data_list .user_image img{
+	padding-top:10px;
+	width: 200px;;
+	height: 250px;;
+}
+
+.data_list .nickName , .data_list .userSign{
+	text-align: center;
+}
+
+.data_list .diary_title{
+	margin-top:20px;
+	text-align: center;
+}
+
+.data_list .diary_info{
+	text-align: center;
+}
+
+.data_list .diary_content{
+	margin-top:20px;
+}
+
+.data_list .diary_action{
+	margin-top:20px;
+}
+
+.data_list .diary_type{
+	margin-top:10px;
+}
+
+.data_list .diary_title{
+	margin-top:20px;
+	text-align: center;
+}
+
+.data_list .data_list_title .dormBuild_add{
+	float: right;
+	margin-right: 20px;
+}
+
+.data_list .data_form{
+	margin-top:20px;
+}
+
+.form-search{
+	margin-top:5px;
+	margin-bottom: 5px;
+}
+
+.data_search{
+	float:right;
+}
+
+.select_form {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.data_select {
+	float: right;
+}
+
+.pagination .pagination_box{
+	width:14em;
+	height:2em;
+	float:right;
+}
+
+.pagination .pagination_box .page_up,
+.pagination .pagination_box .page_down{
+	width:5em;
+	background-color:#4dc47d;
+	color:white;
+	border-radius: 3px;
+	border:none;
+}
+
+.pagination .pagination_box .page_cur{
+	width:4em;
+	background-color:#F0EEF5;
+}
+
+.pagination .pagination_box .page_up,
+.pagination .pagination_box .page_cur,
+.pagination .pagination_box .page_down{
+	float:left;
+	height:100%;
+	line-height:2em;
+	text-align:center;
+}
+
+.edit_dorm{
+
+   border: 1px solid #E5E5E5;
+    padding: 0;
+    background-color: #FDFDFD;
+    width: 100%; 
+    margin-left: 0; 
+}
+
+.dropdown .dropdown-menu li{
+	width:100%;
+}
+
+.dropdown .dropdown-menu li a{
+	text-align:center;
+}

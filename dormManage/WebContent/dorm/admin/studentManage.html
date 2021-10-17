@@ -1,0 +1,379 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<title>公众号【C you again】学生管理</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="" />
+		<link href="../css/style.css" rel='stylesheet' type='text/css' />
+		<link href="../css/dorm.css" rel='stylesheet' type='text/css' />
+		<link href="../css/bootstrap/bootstrap.css" rel='stylesheet' type='text/css' />
+		<script src="../js/jquery.min.js"></script>
+		<script src="../js/bootstrap.min.js"></script>
+		<script src="../js/vue/vue.js"></script>
+        <script src="../js/vue/axios.min.js"></script> 
+	</head>
+
+	<body >
+	
+		<!-- banner -->
+		<div class="banner" >
+		
+			<div class="header">
+				<div class="logo" id="session__app">
+					<a href="javascript:window.location.reload();">{{login.userName}}</a>
+				</div>
+				<div class="top-menu">
+					
+					<ul class="navig">
+						<li>
+							<a href="admin_index.html">首页</a>
+						</li>
+						<li>
+							<a href="dormManage.html">宿舍管理员</a>
+						</li>
+						<li class="active">
+							<a href="#">学生</a>
+						</li>
+						<li>
+							<a href="buildManage.html">宿舍楼</a>
+						</li>
+						<li>
+							<a href="recordManage.html">考勤</a>
+						</li>
+						<li>
+							<a href="punchClockManage.html">打卡</a>
+						</li>
+						<li>
+							<a href="noticeManage.html">公告</a>
+						</li>
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!---->
+		
+		<!--  -->
+		
+		<div class="center-content" id="app">
+			<div class="left">
+				<div class="gongGao">
+					<div class="title">公 告</div>
+					<div class="context">你是管理员，请<a style="display:inline-block;" href="noticeManage.html">发布公告</a></div>
+				</div>
+				<div class="gongGao">
+					<div class="title">友 情 链 接</div>
+					<div class="context">
+						<a href="https://blog.csdn.net/qq_40625778">》CSDN，技术分享</a>
+						<a href="https://gzh.cyouagain.cn/">》热门文章推荐</a>
+						<a href="https://y0ahx3.coding-pages.com/">》个人博客，系统源码大全</a>
+						<a href="https://www.cnblogs.com/cafuc20160512056/">》博客园，技术分享</a>
+						<a href="https://www.jianshu.com/u/33531987c9a7">》简书，技术分享</a>
+						
+					</div>
+				</div>
+				<div class="gongGao">
+					<div class="title">源 码 下 载</div>
+					<div class="context">
+						<div style="font-size:14px; width: 100%;  height: 400px;margin-bottom: 20px;">
+							<div style="padding: 5px;  color: black">
+								<label style="font-size:15px;font-weight: normal;">下载源码请到公众号：C you again</label><br />
+								<label style="font-size:15px;font-weight: normal;">1、求职者：面试题、面试经验、面试技巧</label><br />
+								<label style="font-size:15px;font-weight: normal;">2、职场人：技术分享、程序人生</label><br />
+								<label style="font-size:15px;font-weight: normal;">3、学生党：Java从入门到精通PDF版教程、数据结构与算法、各类系统实战教程</label><br />
+								<label style="font-size:15px;font-weight: normal;">4、其它：PPT模板、简历模板、计算机使用技术及技巧</label>
+							</div>
+							<img width="160px" style="margin-left:50px;" src="../img/gzh.jpg" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="right">
+					<div class="data_list">
+						<div class="data_list_title">
+							学生管理
+						</div>
+						<form name="myForm" class="form-search" method="post" action="#">
+							<button  type="button" class="btn btn-primary" id="btn_add" data-toggle="modal"
+                                            data-target="#addModal">添加学生</button>
+							<span class="data_search">
+					<select v-model="search.filter" id="searchType" name="searchType" style="width: 80px;">
+					<option value="name">姓名</option>
+					<option value="stuNum">学号</option>
+					<option value="dormName">寝室号</option>
+					</select>
+					&nbsp;<input v-model="search.key" id="s_dormManagerText" name="s_dormManagerText" type="text"  style="width:120px;height: 30px;" class="input-medium search-query" >
+					&nbsp;<button onclick="searchDormManage()" type="button" class="btn btn-info" >搜索</button>
+				</span>
+						</form>
+						<div>
+							<table class="table table-hover table-striped table-bordered">
+								<tr>
+								    <th>编号</th>
+									<th>学号</th>
+									<th>姓名</th>
+									<th>性别</th>
+									<th>宿舍楼</th>
+									<th>寝室号</th>
+									<th>手机</th>
+									<th>操作</th>
+								</tr>
+								
+									<tr v-for="(item,index) in studentManageList">
+										<td>{{index+1}}</td>
+										<td>{{item.stuNum}}</td>
+										<td>{{item.name}}</td>
+										<td>{{item.sex}}</td>
+										<td>{{item.dormBuildId==0?'暂未安排':item.dormBuildId+'栋'}}</td>
+										<td>{{item.dormName}}</td>
+										<td>{{item.tel}}</td>
+										<td><button class="btn btn-mini btn-info" type="button"  @click="getStudentMangerById(item.studentId)" id="btn_edit" data-toggle="modal" data-target="#updateModal">修改</button>&nbsp;
+											<button class="btn btn-mini btn-danger" type="button" @click="studentManagerDeleteById(item.studentId)">删除</button></td>  
+									</tr>
+								
+							</table>
+						</div>
+						
+						<div class="pagination pagination-centered">
+							<div class="pagination_box">
+							  <button id="page_up" type="button" onclick="pageUp()" class="page_up">上一页</button>
+							  <div class="page_cur">{{pagination.pageNum}}/{{pagination.pageTotal}}</div>
+							  <button id="page_down" onclick="pageDown()" type="button" class="page_down">下一页</button>
+							</div>
+						</div>
+					</div>
+			</div>
+		</div>
+
+		<!---->
+		
+	      <div class="copywrite">
+			<div class="container">
+				<p>版权声明：此系统来自于公众号【C you again】，使用过程中请注明来源！欢迎大家学习，参考！
+					<a href="https://cyouagain.cn/">公众号官网，点击查看更细系统源码</a>  | 
+					<a href="https://gzh.cyouagain.cn/">热文推荐</a>
+				</p>
+			</div>
+		</div>  
+		
+		<!--------------------------------------添加的模糊框------------------------>
+    <form class="form-horizontal" method="post" action="#">   <!--保证样式水平不混乱-->
+        <!-- 模态框（Modal） -->
+        <div  class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div id="addStudentManage_app" class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            添加学生
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <!---------------------表单-------------------->
+
+                        <div class="form-group">
+                            <label for="firstname" class="col-sm-3 control-label">学号</label>
+                            <div class="col-sm-7">
+                                <input v-model="studentManage.stuNum" type="text" class="form-control" id="addStuNum" required="required" name="stuNum"
+                                       placeholder="请输入学号">
+                                <label class="control-label" for="addUserName" style="display: none;"></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="firstname" class="col-sm-3 control-label">密码</label>
+                            <div class="col-sm-7">
+                                <input type="password" class="form-control" id="addPassword" required="required" name="password"
+                                       placeholder="请输入密码">
+                                <label class="control-label" for="addPassword" style="display: none;"></label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="firstname" class="col-sm-3 control-label">重复密码</label>
+                            <div class="col-sm-7">
+                                <input v-model="studentManage.password" type="password" class="form-control" id="addPassword2" required="required" name=""
+                                  onBlur="checkPassword('add')"     placeholder="请输入密码">
+                                <label class="control-label" for="addPassword" style="display: none;"></label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="firstname" class="col-sm-3 control-label">姓名</label>
+                            <div class="col-sm-7">
+                                <input v-model="studentManage.name" type="text" class="form-control" id="addName" required="required" name="name"
+                                       placeholder="请输入姓名">
+                                <label class="control-label" for="addName" style="display: none;"></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="firstname" class="col-sm-3 control-label">性别</label>
+                            <div class="col-sm-7">
+                                <select v-model="studentManage.sex" class="form-control" id="addSex" name="sex">
+                                    <option value="0">男</option>
+                                    <option value="1" >女</option>
+                                </select>
+                                <label class="control-label" for="addSex" style="display: none;"></label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="firstname" class="col-sm-3 control-label">宿舍楼</label>
+                            <div class="col-sm-7">
+                                <input v-model="studentManage.dormBuildId" type="text" class="form-control" id="addDormBuildId" required="required" name="dormBuildId"
+                                       placeholder="请输入宿舍楼">
+                                <label class="control-label" for="tel" style="display: none;"></label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="firstname" class="col-sm-3 control-label">寝室号</label>
+                            <div class="col-sm-7">
+                                <input v-model="studentManage.dormName" type="text" class="form-control" id="addDormName" required="required" name="dormName"
+                                       placeholder="请输入寝室号">
+                                <label class="control-label" for="tel" style="display: none;"></label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="firstname" class="col-sm-3 control-label">联系电话</label>
+                            <div class="col-sm-7">
+                                <input v-model="studentManage.tel" type="text" class="form-control" id="addTel" required="required" name="tel"
+                                       placeholder="请输入电话">
+                                <label class="control-label" for="tel" style="display: none;"></label>
+                            </div>
+                        </div>
+
+
+                        <!---------------------表单-------------------->
+                    </div>
+                    <div class="modal-footer">
+                        <button onclick="exit()" type="button" class="btn btn-default" data-dismiss="modal">关闭
+                        </button>
+                        <button type="button" onclick="addStudentManageMsg()" class="btn btn-primary hidden_btn">
+                            添加
+                        </button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+
+    </form>
+    <!--------------------------------------添加的模糊框------------------------>
+    
+    <!------------------------------ 修改模态框（Modal） ---------------------------------->
+    <form class="form-horizontal" method="post" action="#">   <!--保证样式水平不混乱-->
+        <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel"
+             aria-hidden="true">
+            <div id="getStudentMangerById_app" class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="updateModalLabel">
+                            修改宿管信息
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <!---------------------表单-------------------->
+                          <div class="form-group">
+                            <label for="firstname" class="col-sm-3 control-label">学号</label>
+                            <div class="col-sm-7">
+                                <input v-model="studentManage.stuNum" type="text" class="form-control" id="addStuNum" required="required" name="stuNum"
+                                       placeholder="请输入学号">
+                                <label class="control-label" for="addUserName" style="display: none;"></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="firstname" class="col-sm-3 control-label">密码</label>
+                            <div class="col-sm-7">
+                                <input type="password" class="form-control" id="editPassword" required="required" name="password"
+                                       placeholder="请输入密码">
+                                <label class="control-label" for="addPassword" style="display: none;"></label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="firstname" class="col-sm-3 control-label">重复密码</label>
+                            <div class="col-sm-7">
+                                <input v-model="studentManage.password" type="password" class="form-control" id="addPassword2" required="required" name=""
+                                  onBlur="checkPassword('add')"     placeholder="请输入密码">
+                                <label class="control-label" for="addPassword" style="display: none;"></label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="firstname" class="col-sm-3 control-label">姓名</label>
+                            <div class="col-sm-7">
+                                <input v-model="studentManage.name" type="text" class="form-control" id="addName" required="required" name="name"
+                                       placeholder="请输入姓名">
+                                <label class="control-label" for="addName" style="display: none;"></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="firstname" class="col-sm-3 control-label">性别</label>
+                            <div class="col-sm-7">
+                                <select v-model="studentManage.sex" class="form-control" id="addSex" name="sex">
+                                    <option value="0">男</option>
+                                    <option value="1" >女</option>
+                                </select>
+                                <label class="control-label" for="addSex" style="display: none;"></label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="firstname" class="col-sm-3 control-label">宿舍楼</label>
+                            <div class="col-sm-7">
+                                <input v-model="studentManage.dormBuildId" type="text" class="form-control" id="addDormBuildId" required="required" name="dormBuildId"
+                                       placeholder="请输入宿舍楼">
+                                <label class="control-label" for="tel" style="display: none;"></label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="firstname" class="col-sm-3 control-label">寝室号</label>
+                            <div class="col-sm-7">
+                                <input v-model="studentManage.dormName" type="text" class="form-control" id="addDormName" required="required" name="dormName"
+                                       placeholder="请输入寝室号">
+                                <label class="control-label" for="tel" style="display: none;"></label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="firstname" class="col-sm-3 control-label">联系电话</label>
+                            <div class="col-sm-7">
+                                <input v-model="studentManage.tel" type="text" class="form-control" id="addTel" required="required" name="tel"
+                                       placeholder="请输入电话">
+                                <label class="control-label" for="tel" style="display: none;"></label>
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                        </button>
+                        <button type="button" onclick="updataStudentManageMsg()" class="btn btn-primary">
+                            修改
+                        </button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+
+    </form>
+    <!-------------------------------修改的模态框------------------------------->
+	<script src="../js/vue/admin_studentManage.js"></script>
+	<script src="../js/vue/admin_loginManage.js"></script>
+	</body>
+ 
+</html>

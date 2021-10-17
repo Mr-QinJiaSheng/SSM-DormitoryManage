@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+
+		<title>公众号：C you again的主页,毕业设计,IT技术分享</title>
+		<meta name="description" content="公众号：C you again，专注于IT技术分享，资源免费分享，IT技术分享,源码分享,PPT模板,简历模板,编程语言,程序人生,Java,数据结构,算法,PTA,C语言,C++,html,游戏">
+		<meta name="keywords" content="公众号：C you again,IT技术,微信公众号,公众号平台,订阅号,公众号文章投稿,毕业设计,课程设计,Java教程,图书管理系统,贪吃蛇,人力资源管理系统,基于SSM的客户管理系统,OA办公系统,基于java的企业进销存管理系统,ERP仓库管理系统,机票管理系统,JavaWeb权限管理系统,基于MVC的寝室管理系统,JavaWeb订餐系统,商城系统,学生信息管理系统,SSM框架,SSH框架,数据库,Mysql,Redis,JDk,PPT模板,简历模板,编程语言,程序人生,Java,JDK,web,Jsp,Servlet,Tomcat,JDBC,数据结构,算法,PTA,C语言,C++,html,游戏,photoshop">
+		<link rel="stylesheet" type="text/css" href="dorm/css/cya.css">
+        <script src="dorm/js/vue/vue.js"></script>
+        <script src="dorm/js/vue/axios.min.js"></script>
+		<script src="dorm/js/jquery.min.js"></script>
+		<script src="dorm/js/bg.js"></script>
+
+	</head>
+
+	<body id="body">
+		<div id="bg"></div>
+		<div class="login-box box1" >
+			<div class="bg_title">欢 迎 你 访 问  寝 室 管 理 平 台</div>
+			<div class="admin"> 
+				<div class="admin-titel titel">我是系统管理员</div>
+				<div class="admin-content content">
+					<ul>
+						<li>公告管理</li>
+					    <li>宿舍楼管理</li>
+					    <li>寝室管理</li>
+					    <li>学生管理</li>
+					    <li>考勤、打卡管理</li>
+					</ul>
+					<button onclick="move('我是系统管理员','admin')" type="button">点我登录</button>
+				</div>
+			</div>
+			<div class="dormManage">
+				<div class="dormManage-titel titel">我是宿舍管理员</div>
+				<div class="dormManage-content content">
+					<ul>
+					  <li>查看公告</li>
+					  <li>查看、删除自己管理的学生</li>
+					  <li>添加、修改、删除考勤记录</li>
+					  <li>查看学生打卡记录</li>
+					  <li>查看、修改个人信息</li>
+					</ul>
+					<button onclick="move('我是宿舍管理员','dormManager')" type="button">点我登录</button>
+				</div>
+			</div>
+			<div class="student">
+				<div class="student-titel titel">我是学生</div>
+				<div class="student-content content">
+					<ul>
+					  <li>查看公告</li>
+					  <li>查看考勤记录</li>
+					  <li>完成打卡任务，查看打卡记录</li>
+					  <li>查看、修改个人信息</li>
+					</ul>
+					<button onclick="move('我是学生','student')" type="button">点我登录</button>
+				</div>
+			</div>
+		</div>
+		
+		
+		<div class="login-box box2" >
+			<div class="bg_title">欢 迎 你 访 问  寝 室 管 理 平 台</div>
+			
+			<div class="student content">
+				<div class="student-titel titel role_titel"></div>
+				<div class="student-content content">
+					<div class="left">
+						<ul>
+							<li>系统管理员：用户名【admin】密码【cya】</li>
+							<li>宿舍管理员：用户名【dorm】密码【cya】</li>
+							<li>学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;生：用户名【002】密码【cya】</li>
+							<li>关注公众号【C you again】，获取更多源码</li>
+							<li>
+								<img width="32%" src="dorm/img/gzh.jpg" />
+							</li>
+						</ul>
+					</div>
+					<div class="right" id="login_app">
+						<ul>
+							<li></li>
+							<li>
+								用户名：<input required="required" v-model="login.userName" type="text" placeholder="输入用户名"/>
+							</li>
+							
+							<li>
+								密&nbsp;&nbsp;&nbsp;码：<input required="required" v-model="login.password" type="password" placeholder="输入密码"/>
+								<input id="role" type="hidden" />
+							</li>
+							
+								<button onclick="login()" class="button">登录</button>
+							<li class="a"> 
+								<a href=""> 重新选择角色</a> &nbsp;&nbsp;
+								<a href="https://cyouagain.cn/" target="_blank" > 源码大全</a>
+							</li>
+							
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+    <script src="dorm/js/vue/loginManage.js"></script>
+	</body>
+
+</html>

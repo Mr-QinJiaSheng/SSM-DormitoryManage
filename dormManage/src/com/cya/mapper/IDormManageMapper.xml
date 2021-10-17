@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cya.mapper.IDormManageMapper">
+
+<select id="getStudentMsgByBuildId" resultType="com.cya.entity.Student">
+    select studentId,stuNum,name,dormBuildId,dormName,sex,tel
+from t_student where 1=1
+    
+      <if test="filter=='name' and key !='' ">
+       and name like concat("%",#{key},"%")
+      </if>
+      <if test="filter=='stuNum' and key !='' ">
+       and stuNum like concat("%",#{key},"%")
+      </if>
+      <if test="filter=='dormName' and key !='' ">
+       and dormName like concat("%",#{key},"%")
+      </if>
+ 
+      <if test="dormBuildId!=null" >
+        and dormBuildId=#{dormBuildId}
+      </if>
+    
+  </select>
+
+
+<delete id="studentMsgDeleteById" parameterType="Integer">
+     delete from t_student where studentId=#{studentId}
+  </delete>
+  
+  
+  <select id="getRecordMsg" resultType="com.cya.entity.Record">
+    select * from t_record where 1=1
+    
+      <if test="filter=='studentName' and key !='' ">
+       and studentName like concat("%",#{key},"%")
+      </if>
+      <if test="filter=='studentNumber' and key !='' ">
+       and studentNumber like concat("%",#{key},"%")
+      </if>
+      <if test="filter=='dormName' and key !='' ">
+       and dormName like concat("%",#{key},"%")
+      </if>
+ 
+      <if test="dormBuildId!=null" >
+        and dormBuildId=#{dormBuildId}
+      </if>
+    
+  </select>
+  
+  
+  <select id="getRecordById" parameterType="Integer" resultType="com.cya.entity.Record">
+     select * from t_record where recordId=#{recordId}
+  </select>
+  
+  <update id="updataRecordMsg" parameterType="com.cya.entity.Record">
+    update t_record set detail=#{detail} where recordId=#{recordId}
+  </update>
+  
+   <insert id="addRecordMsg" parameterType="com.cya.entity.Record">
+    insert into t_record(studentNumber,studentName,dormBuildId,dormName,date,detail) values(#{studentNumber},#{studentName},#{dormBuildId},#{dormName},current_date,#{detail})
+  </insert>
+  
+  <delete id="recordManagerDeleteById1" parameterType="Integer">
+     delete from t_record where recordId=#{recordId}
+  </delete>
+  
+   <!-- ******************** 我的 ******************* -->
+ 
+ <select id="dorm_getMyMsgById" resultType="com.cya.entity.DormManage">
+  select * from t_dormmanager where dormManId=#{dormManId}
+ </select>
+ 
+ <update id="dorm_updateMyMsgById" parameterType="com.cya.entity.DormManage">
+    update t_dormmanager set userName=#{userName},name=#{name},tel=#{tel} where dormManId=#{dormManId}
+  </update>
+  
+  <update id="dorm_updatePsd" parameterType="com.cya.entity.DormManage">
+    update t_dormmanager set password=#{password} where dormManId=#{dormManId}
+  </update>
+ 
+ <!-- ******************** 我的 ******************* -->
+ 
+ <select id="getNoticeAll" resultType="com.cya.entity.Notice">
+    select * from t_notice
+ </select>
+ 
+ <!-- ******************** 打卡 ******************* -->
+ 
+ <select id="getPunchClockRecordMsgByDormBuildId" resultType="com.cya.entity.PunchClockRecord">
+    select * from t_punchclockrecord where 1=1
+    
+      <if test="filter=='date' and key !='' ">
+       and punchClock_date like concat("%",#{key},"%")
+      </if>
+      <if test="dormBuildId!=null" >
+        and dormBuildId=#{dormBuildId}
+      </if>
+    
+  </select>
+  
+  <!-- ******************** 打卡 ******************* -->
+  
+</mapper>

@@ -1,0 +1,166 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+   /* background-image: linear-gradient(to left, rgba(255, 0, 149, 0.2), rgba(0, 247, 255, 0.2)), url(../img/bg.jpg); */
+    background-color: rgb(1,112,254);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    z-index:-2000;
+}
+
+#bg{
+	
+	background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size:cover;
+	position:fixed;
+	width:100%;
+	height:100%;
+	z-index:-1000;
+    opacity:0.8;
+}
+
+.login-box {
+  
+    width: 60%;
+    position: absolute;
+    left: 50%;
+    height: 25em;
+    top: 50%;
+    margin-top: -12.5em;
+    margin-left: -30%;
+    
+}
+
+.login-box .bg_title{
+	width: 100%;
+	font-weight: bold;
+	font-size: 2em;
+	text-align: center;
+	margin-bottom: 1.2em;
+	background-color: #4dc47d;
+	color: white;
+	float: left;
+	opacity: 0.8;
+}
+
+
+.login-box .admin,
+.login-box .dormManage,
+.login-box .student{
+	width: 30%;
+	height: 75%;
+	margin-left: 2.3%;
+	float: left;
+	opacity: 0.8;
+}
+
+.login-box .admin .titel,
+.login-box .dormManage .titel,
+.login-box .student .titel{ 
+	width: 100%;
+	height: 15%;
+	float: left;
+	line-height: 3em;
+	text-align: center;
+	color: white;
+	font-weight: bold;
+	font-size: 1em;
+	background-color: #4dc47d;
+}
+
+.login-box .admin .content,
+.login-box .dormManage .content,
+.login-box .student .content{
+	background-color: white;
+	width: 100%;
+	height: 100%;
+}
+
+.login-box .admin .content ul,
+.login-box .dormManage .content ul,
+.login-box .student .content ul{
+	width: 100%;
+	height: 82%;
+}
+	
+
+.login-box .admin .content li,
+.login-box .dormManage .content li,
+.login-box .student .content li{
+	width: 100%;
+	font-size:15px;
+	margin-top: 8px;
+	float: left;
+	list-style: none;
+	text-align:center;
+}
+
+.login-box .admin .content button,
+.login-box .dormManage .content button,
+.login-box .student .content button{
+	width: 100px;
+	height: 30px;
+	float: left;
+	bottom: 10px;
+	margin-left: 70px;
+	color: white;
+	border: none;
+	background-color: #4dc47d;
+	border-radius: 5px;
+}
+
+.box2{
+	display: none
+}
+
+.login-box .content{
+	width: 100%;
+	margin-left: 0;
+}
+
+.content .left{
+	width: 50%;
+	height: 100%;
+	float: left;
+	background-color: white;
+}
+
+.content .right{
+	width: 50%;
+	height: 100%;
+	float: left;
+	background-color: white;
+}
+
+.right ul li{
+	width: 100%;
+	height: 25px;
+	margin-top: 25px;
+}
+
+.right ul li input{
+	height: 25px;
+	border-radius: 5px;
+	border: 2px solid #4dc47d;
+}
+
+.right  .button{
+	position: relative;
+	top: 25px;
+	left: 82px;
+}
+
+.right .a{
+	position: relative;
+	top: 50px;
+	left: 35px;
+}
+
+
+
+	

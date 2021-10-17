@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cya.mapper.IAdminMapper">
+
+ <!-- ******************** 宿管 ******************* --> 
+
+  <!-- 获取宿管信息 -->
+  <select id="getDormManage" resultType="com.cya.entity.DormManage">
+    select dormManId,userName,dormBuildId,name,sex,tel from t_dormmanager
+    <where>
+      <if test="filter=='name' and key !='' ">
+        name like concat("%",#{key},"%")
+      </if>
+      <if test="filter=='userName' and key !='' ">
+        userName like concat("%",#{key},"%")
+      </if>
+    </where>
+  </select>
+  
+  <insert id="addDormManage" parameterType="com.cya.entity.DormManage">
+    insert into t_dormmanager(userName,password,name,sex,tel) values(#{userName},#{password},#{name},#{sex},#{tel})
+  </insert>
+  
+  <select id="getDormMangerById" parameterType="Integer" resultType="com.cya.entity.DormManage">
+     select * from t_dormmanager where dormManId=#{dormManId}
+  </select>
+  
+  <update id="updataDormManageById" parameterType="com.cya.entity.DormManage">
+    update t_dormmanager set userName=#{userName},password=#{password},name=#{name},sex=#{sex},tel=#{tel} where dormManId=#{dormManId}
+  </update>
+  
+  <delete id="deleteDormManageById" parameterType="Integer">
+  
+     delete from t_dormmanager where dormManId=#{dormManId}
+  </delete>
+  
+ <!-- ******************** 宿管 ******************* --> 
+
+
+ <!-- ******************** 学生 ******************* --> 
+
+<!-- 获取学生信息 -->
+  <select id="getStudentManage" resultType="com.cya.entity.Student">
+    select studentId,stuNum,name,dormBuildId,dormName,sex,tel
+from t_student
+    <where>
+      <if test="filter=='name' and key !='' ">
+        name like concat("%",#{key},"%")
+      </if>
+      <if test="filter=='stuNum' and key !='' ">
+        stuNum like concat("%",#{key},"%")
+      </if>
+      <if test="filter=='dormName' and key !='' ">
+        dormName like concat("%",#{key},"%")
+      </if>
+    </where>
+  </select>
+  
+  <insert id="addStudentManage" parameterType="com.cya.entity.Student">
+    insert into t_student(stuNum,password,name,dormBuildId,dormName,sex,tel) values(#{stuNum},#{password},#{name},#{dormBuildId},#{dormName},#{sex},#{tel})
+  </insert>
+  
+  <select id="getStudentMangerById" parameterType="Integer" resultType="com.cya.entity.Student">
+     select * from t_student where studentId=#{studentId}
+  </select>
+  
+  <update id="updataStudentManageById" parameterType="com.cya.entity.Student">
+    update t_student set stuNum=#{stuNum},password=#{password},name=#{name},sex=#{sex},dormBuildId=#{dormBuildId},dormName=#{dormName},tel=#{tel} where studentId=#{studentId}
+  </update>
+  
+  <delete id="studentManagerDeleteById" parameterType="Integer">
+  
+     delete from t_student where studentId=#{studentId}
+  </delete>
+
+ <!-- ******************** 学生 ******************* --> 
+ 
+ 
+ <!-- ******************** 宿舍楼 ******************* --> 
+ 
+ <select id="getBuildManage" resultType="com.cya.entity.DormBuild">
+    select * from t_dormbuild
+    <where>
+      <if test="filter=='dormBuildName' and key !='' ">
+        dormBuildName like concat("%",#{key},"%")
+      </if>
+    </where>
+  </select>
+  
+  <insert id="addBuildManage" parameterType="com.cya.entity.DormBuild">
+    insert into t_dormbuild(dormBuildName,dormBuildDetail) values(#{dormBuildName},#{dormBuildDetail})
+  </insert>
+  
+  <select id="getBuildMangerById" parameterType="Integer" resultType="com.cya.entity.DormBuild">
+     select * from t_dormbuild where dormBuildId=#{dormBuildId}
+  </select>
+  
+  <update id="updataBuildManageById" parameterType="com.cya.entity.DormBuild">
+    update t_dormbuild set dormBuildName=#{dormBuildName},dormBuildDetail=#{dormBuildDetail} where dormBuildId=#{dormBuildId}
+  </update>
+  
+  <delete id="buildManagerDeleteById" parameterType="Integer">
+  
+     delete from t_dormbuild where dormBuildId=#{dormBuildId}
+  </delete>
+  
+  <select id="getDormMangerByBuildId" resultType="com.cya.entity.DormManage">
+    select dormManId,name,sex,tel from t_dormmanager where dormBuildId=#{dormBuildId}
+  </select>
+  
+  <select id="getDormManage2" resultType="com.cya.entity.DormManage">
+    select dormManId,name from t_dormmanager
+  </select>
+  
+  <update id="addDormManageToBuild" parameterType="Integer">
+    update t_dormmanager set dormBuildId=#{dormBuildId} where dormManId=#{dormManId}
+  </update>
+  
+  <update id="removeaDormManageToBuild" parameterType="Integer">
+    update t_dormmanager set dormBuildId=0 where dormManId=#{dormManId}
+  </update>
+ 
+ <!-- ******************** 宿舍楼 ******************* -->
+  
+  
+ <!-- ******************** 考勤 ******************* -->
+  
+  <select id="getRecordManage" resultType="com.cya.entity.Record">
+    select * from t_record
+    <where>
+      <if test="filter=='studentName' and key !='' ">
+        studentName like concat("%",#{key},"%")
+      </if>
+      <if test="filter=='studentNumber' and key !='' ">
+        studentNumber like concat("%",#{key},"%")
+      </if>
+      <if test="filter=='dormName' and key !='' ">
+        dormName like concat("%",#{key},"%")
+      </if>
+    </where>
+  </select>
+  
+  <delete id="recordManagerDeleteById" parameterType="Integer">
+     delete from t_record where recordId=#{recordId}
+  </delete>
+  
+ <!-- ******************** 考勤 ******************* -->
+ 
+ 
+ <!-- ******************** 公告 ******************* -->
+ 
+  <select id="getNoticeManage" resultType="com.cya.entity.Notice">
+    select * from t_notice
+    <where>
+      <if test="filter=='date' and key !='' ">
+        date like concat("%",#{key},"%")
+      </if>
+    </where>
+  </select>
+  
+   <insert id="addNoticeManage" parameterType="com.cya.entity.Notice">
+    insert into t_notice(noticePerson,date,content) values(#{noticePerson},current_date,#{content})
+  </insert>
+  
+  <select id="getNoticeMangerById" parameterType="Integer" resultType="com.cya.entity.Notice">
+     select * from t_notice where noticeId=#{noticeId}
+  </select>
+  
+  <update id="updataNoticeManageById" parameterType="com.cya.entity.Notice">
+    update t_notice set noticePerson=#{noticePerson},content=#{content} where noticeId=#{noticeId}
+  </update>
+  
+  <delete id="noticeManagerDeleteById" parameterType="Integer">
+  
+     delete from t_notice where noticeId=#{noticeId}
+  </delete>
+ 
+ <!-- ******************** 公告 ******************* -->
+ 
+ <!-- ******************** 我的 ******************* -->
+ 
+ <select id="getMyMsgById" resultType="com.cya.entity.Admin">
+  select * from t_admin where adminId=#{adminId}
+ </select>
+ 
+ <update id="updateMyMsgById" parameterType="com.cya.entity.Admin">
+    update t_admin set userName=#{userName},name=#{name},tel=#{tel} where adminId=#{adminId}
+  </update>
+  
+  <update id="updatePsd" parameterType="com.cya.entity.Admin">
+    update t_admin set password=#{password} where adminId=#{adminId}
+  </update>
+ 
+ <!-- ******************** 我的 ******************* -->
+ 
+ 
+ 
+ <!-- ******************** 打卡 ******************* -->
+ 
+ <select id="getPunchClockManage" resultType="com.cya.entity.PunchClock">
+    select * from t_punchclock
+    <where>
+      <if test="filter=='date' and key !='' ">
+        date like concat("%",#{key},"%")
+      </if>
+    </where>
+  </select>
+  
+  <insert id="addPunchClockManageMsg"  parameterType="com.cya.entity.PunchClock"> 
+    
+    insert into t_punchclock(id,theme,detail,date,person) values(#{id},#{theme},#{detail},current_date,#{person})
+  
+  </insert>
+  
+  <select id="getPunchClockMangerById" parameterType="java.lang.String" resultType="com.cya.entity.PunchClock">
+     select * from t_punchclock where id=#{id}
+  </select>
+  
+  <update id="updataPunchClockManageMsgById" parameterType="com.cya.entity.PunchClock">
+    update t_punchclock set theme=#{theme},detail=#{detail} where id=#{id}
+  </update>
+  
+  <delete id="punchClockManagerDeleteById" parameterType="java.lang.String">
+  
+     delete from t_punchclock where id=#{id}
+  </delete>
+  
+  <select id="getStudentMsg"  resultType="com.cya.entity.Student">
+     select * from t_student where studentId in(select min(studentId) from t_student group by stuNum)
+  </select>
+ 
+ 
+  <insert id="insertIntoPunchClockRecord" parameterType="com.cya.entity.PunchClockRecord">
+     insert into t_punchclockrecord
+      (punchClock_id,punchClock_date,punchClock_theme,punchClock_detail,punchClock_person,name,dormName,tel,stuNum,dormBuildId,isRecord,punckClock_content) 
+values(#{punchClockId},#{punchClockDate},#{punchClockTheme},#{punchClockDetail},#{punchClockPerson},#{name},#{dormName},#{tel},#{stuNum},#{dormBuildId},#{isRecord},#{punckClockContent})
+  </insert>
+  
+  <update id="updateIntoPunchClockRecordById" parameterType="com.cya.entity.PunchClock">
+    update t_punchclockrecord set punchClock_theme=#{theme},punchClock_detail=#{detail} where punchClock_id=#{id}
+  </update>
+ 
+ <delete id="deletePunchClockRecordById" parameterType="java.lang.String">
+     delete from t_punchclockrecord where punchClock_id=#{id}
+  </delete>
+ 
+ <!-- ******************** 打卡 ******************* -->
+</mapper>
+

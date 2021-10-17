@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cya.mapper.IStudentMapper">
+
+
+<select id="getRecordMsgByStuNum" resultType="com.cya.entity.Record">
+    select * from t_record where 1=1
+      <if test="filter=='date' and key !='' ">
+       and date like concat("%",#{key},"%")
+      </if>
+      <if test="studentNumber!=null" >
+        and studentNumber=#{studentNumber}
+      </if>
+  </select>
+
+
+<!-- ******************** 我的 ******************* -->
+ 
+ <select id="student_getMyMsgById" resultType="com.cya.entity.Student">
+  select * from t_student where studentId=#{studentId}
+ </select>
+ 
+ <update id="student_updateMyMsgById" parameterType="com.cya.entity.Student">
+    update t_student set name=#{name},tel=#{tel} where studentId=#{studentId}
+  </update>
+  
+  <update id="student_updatePsd" parameterType="com.cya.entity.Student">
+    update t_student set password=#{password} where studentId=#{studentId}
+  </update>
+ 
+ <!-- ******************** 我的 ******************* -->
+ 
+ 
+ <!-- ******************** 打卡 ******************* -->
+ <select id="getPunchClockRecordMsgByStuNum" resultType="com.cya.entity.PunchClockRecord">
+    select * from t_punchclockrecord where 1=1
+      <if test="filter=='date' and key !='' ">
+       and punchClock_date like concat("%",#{key},"%")
+      </if>
+      <if test="studentNumber!=null" >
+        and stuNum=#{studentNumber}
+      </if>
+  </select>
+  
+  <select id="getPunckColcokRecordById" resultType="com.cya.entity.PunchClockRecord">
+     select * from t_punchclockrecord where id=#{id}
+  </select>
+  
+   <update id="updataPunchClockRecordMsg" parameterType="com.cya.entity.PunchClockRecord">
+    update t_punchclockrecord set isRecord=true,punckClock_content=#{punckClockContent} where id=#{id}
+  </update>
+  
+  <!-- ******************** 打卡 ******************* -->
+</mapper>

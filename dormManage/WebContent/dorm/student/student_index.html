@@ -1,0 +1,254 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<title>公众号【C you again】 student首页</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="" />
+		<link href="../css/style.css" rel='stylesheet' type='text/css' />
+		<link href="../css/dorm.css" rel='stylesheet' type='text/css' />
+		<link href="../css/bootstrap/bootstrap.css" rel='stylesheet' type='text/css' />
+		<script src="../js/jquery.min.js"></script>
+		<script src="../js/bootstrap.min.js"></script>
+		<script src="../js/bootstrap-dropdown.min.js"></script>
+		<script src="../js/vue/vue.js"></script>
+        <script src="../js/vue/axios.min.js"></script>
+        
+	</head>
+
+	<body >
+	
+		<!-- banner -->
+		<div class="banner" >
+		
+			<div class="header">
+				<div class="logo" id="session_app">
+					<a href="javascript:window.location.reload();">{{login.name}}</a>
+				</div>
+				<div class="top-menu">
+					
+					<ul class="navig">
+						<li class="active">
+							<a href="javascript:window.location.reload();">首页</a>
+						</li>
+						<li>
+							<a href="recordManage.html">考勤记录</a>
+						</li>
+						<li>
+							<a href="punchClockManage.html">打卡记录</a>
+						</li>
+						
+						<li class="dropdown">
+						 <a href="#" class="" role="button" data-hover="dropdown">我的</a>
+						 <ul class="dropdown-menu">
+                                <li onclick="my()"><a href="#updateinfo" data-toggle="modal">个人资料</a></li>
+                                <li><a href="#updatepwd" data-toggle="modal">修改密码</a></li>
+                                <li><a href="javascript:exitSys();">退出</a></li>
+                         </ul>
+					   </li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!---->
+		
+		<!--  -->
+		
+		<div class="center-content" id="app">
+			<div class="left">
+				<div class="gongGao">
+					<div class="title">公 告</div>
+					<div class="context import">
+						<marquee width="100%" height="100%" direction="up" scrolldelay="300">
+							<div v-for="item in noticeList">
+							   <label>发布人：{{item.noticePerson}}</label><br>
+							   <label>发布时间：{{item.date}}</label><br>
+							   <label>{{item.content}}</label><br>
+							   <label>-------------------------------------------</label><br>
+							</div>
+						</marquee>
+
+					</div>
+				</div>
+				<div class="gongGao">
+					<div class="title">友 情 链 接</div>
+					<div class="context">
+						<a href="https://blog.csdn.net/qq_40625778">》CSDN，技术分享</a>
+						<a href="https://gzh.cyouagain.cn/">》热门文章推荐</a>
+						<a href="https://y0ahx3.coding-pages.com/">》个人博客，系统源码大全</a>
+						<a href="https://www.cnblogs.com/cafuc20160512056/">》博客园，技术分享</a>
+						<a href="https://www.jianshu.com/u/33531987c9a7">》简书，技术分享</a>
+						
+					</div>
+				</div>
+				<div class="gongGao">
+					<div class="title">源 码 下 载</div>
+					<div class="context">
+						<div style="font-size:14px; width: 100%;  height: 400px;margin-bottom: 20px;">
+							<div style="padding: 5px;  color: black">
+								<label style="font-size:15px;font-weight: normal;">下载源码请到公众号：C you again</label><br />
+								<label style="font-size:15px;font-weight: normal;">1、求职者：面试题、面试经验、面试技巧</label><br />
+								<label style="font-size:15px;font-weight: normal;">2、职场人：技术分享、程序人生</label><br />
+								<label style="font-size:15px;font-weight: normal;">3、学生党：Java从入门到精通PDF版教程、数据结构与算法、各类系统实战教程</label><br />
+								<label style="font-size:15px;font-weight: normal;">4、其它：PPT模板、简历模板、计算机使用技术及技巧</label>
+							</div>
+							<img width="160px" style="margin-left:50px;" src="../img/gzh.jpg" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="right">
+			  <div class="data_list">
+				<div class="wele">普通用户，欢迎你登录寝室管理系统</div>	
+				<div class="list-content">
+				   <div class="quanxian">你拥有以下权限</div>
+				   <ul>
+				     <li>1、查看公告</li>
+				     <li>2、查看考勤记录</li>
+				     <li>3、完成打卡任务，查看打卡记录</li>
+				     <li>4、查看、修改个人信息</li>
+				   </ul>
+				</div>		
+							
+			</div>
+			</div>
+		</div>
+
+		<!---->
+		
+	      <div class="copywrite">
+			<div class="container">
+				<p>版权声明：此系统来自于公众号【C you again】，使用过程中请注明来源！欢迎大家学习，参考！
+					<a href="https://cyouagain.cn/">公众号官网，点击查看更细系统源码</a>  | 
+					<a href="https://gzh.cyouagain.cn/">热文推荐</a>
+				</p>
+			</div>
+		</div>  
+		
+    
+       	<!-------------------------个人资料模糊框------------------------------------->
+
+<form class="form-horizontal" method="get" action="#">   <!--保证样式水平不混乱-->
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="updateinfo" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+        <div id="user_app" class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="ModalLabel">
+                        个人资料
+                    </h4>
+                </div>
+
+                <div class="modal-body">
+
+                    <!--正文-->
+                    <input type="hidden" name="tip" value="2">
+                    <input type="hidden" name="url" value="admin/index">
+                    
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">学号</label>
+                        <div class="col-sm-7">
+                            <input readonly="readonly" v-model="user.stuNum" type="text" class="form-control"  placeholder="请输入用户名"
+                                   >
+                            <label class="control-label" for="name" style="display: none"></label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">真实姓名</label>
+                        <div class="col-sm-7">
+                            <input v-model="user.name" type="text" class="form-control" id="name" name="name" placeholder="请输入您的真实姓名">
+                            <label class="control-label" for="name" style="display: none"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">手机号</label>
+                        <div class="col-sm-7">
+                            <input v-model="user.tel"  type="text" class="form-control" id="phone" name="tel" placeholder="请输入您的手机号">
+                            <label class="control-label" for="phone" style="display: none"></label>
+                        </div>
+                    </div>
+
+
+                    <!--正文-->
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                    <button onclick="editMyMsg()" class="btn btn-primary">
+                        修改
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+</form>
+<!-------------------------------------------------------------->
+
+<!-------------------------------------------------------------->
+
+<form class="form-horizontal" method="post" action="#">   <!--保证样式水平不混乱-->
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="updatepwd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div id="updatepwd_app" class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        修改密码
+                    </h4>
+                </div>
+                <div class="modal-body">
+
+                    <!--正文-->
+                    
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">原密码</label>
+                        <div class="col-sm-7">
+                            <input required="required" onBlur="checkedPassword()" type="password" class="form-control" name="password" id="oldPwd"
+                                   placeholder="请输入原密码">
+                            <label class="control-label" for="oldPwd" style="display: none"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-3 control-label">新密码</label>
+                        <div class="col-sm-7">
+                            <input required="required" type="password" class="form-control" name="password2" id="newPwd"
+                                   placeholder="请输入新密码">
+                            <label class="control-label" for="newPwd" style="display: none"></label>
+                        </div>
+                    </div>
+
+                    <!--正文-->
+                </div>
+                <div class="modal-footer">
+                    <button  type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" onclick="editPassword()" class="btn btn-primary">
+                        修改
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+</form>
+<!-------------------------------------------------------------->
+    <!-------------------------------修改的模态框------------------------------->
+	<script src="../js/vue/student_studentManage.js"></script>
+	<script src="../js/vue/student_loginManage.js"></script>
+	
+	</body>
+ 
+</html>

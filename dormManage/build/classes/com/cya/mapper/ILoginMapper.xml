@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cya.mapper.ILoginMapper">
+
+   <select id="loginToAdmin" resultType="com.cya.entity.Admin">
+     select * from t_admin where userName=#{userName} and password=#{password}
+   </select>
+   
+   <select id="loginToDormManage" resultType="com.cya.entity.DormManage">
+     select * from t_dormmanager where userName=#{userName} and password=#{password}
+   </select>
+   
+   <select id="loginToStudent" resultType="com.cya.entity.Student">
+     select * from t_student where stuNum=#{userName} and password=#{password}
+   </select>
+</mapper>
